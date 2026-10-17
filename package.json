@@ -45,7 +45,7 @@
     "win": {
       "target": [{ "target": "nsis", "arch": ["x64"] }],
       "icon": "build/icon.ico",
-      "artifactName": "AIHub-DJ-Setup-${version}.${ext}",
+      "artifactName": "AIHub-DJ-Setup.${ext}",
       "requestedExecutionLevel": "asInvoker"
     },
     "nsis": {

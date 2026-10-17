@@ -3,3 +3,6 @@ out/
 dist/
 *.log
 build/icon-preview-48.png
+
+# Original photo stays local; the site uses landing/img/erick-320.jpg
+Erick.jpg
