@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "echo \"Static site: nothing to install\"",
+  "buildCommand": "echo \"Static site: landing/ is served as-is\"",
+  "outputDirectory": "landing",
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/img/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+    }
+  ]
+}
