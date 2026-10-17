@@ -1,0 +1,63 @@
+{
+  "name": "aihub-dj",
+  "version": "1.0.0",
+  "description": "AIHub DJ — the DJ console from AIHub Browser as its own desktop app: two decks, YouTube and local music, stems, effects, AI DJ.",
+  "main": "./out/main/index.js",
+  "author": "Erick OMARI — My Digital Solutions",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "test": "vitest run",
+    "icon": "cross-env ELECTRON_RUN_AS_NODE= electron scripts/make-icon.cjs",
+    "package": "npm run build && cross-env ELECTRON_RUN_AS_NODE= electron-builder --win",
+    "postinstall": "install-electron"
+  },
+  "dependencies": {
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^1.0.1",
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "cross-env": "^10.1.0",
+    "electron": "44.5.1",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^2.3.0",
+    "jsdom": "^29.1.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1",
+    "vitest": "^2.1.0"
+  },
+  "build": {
+    "appId": "com.mydigitalsolutions.aihub-dj",
+    "productName": "AIHub DJ",
+    "copyright": "Copyright © 2026 Erick OMARI — My Digital Solutions",
+    "asar": true,
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["out/**/*", "LICENSE.txt"],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "build/icon.ico",
+      "artifactName": "AIHub-DJ-Setup-${version}.${ext}",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AIHub DJ",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "license": "LICENSE.txt"
+    }
+  }
+}

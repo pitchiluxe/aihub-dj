@@ -1,0 +1,5 @@
+node_modules/
+out/
+dist/
+*.log
+build/icon-preview-48.png
