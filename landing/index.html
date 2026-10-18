@@ -393,7 +393,7 @@
   <div class="wrap">
     <div class="dl-box r">
       <img class="icon" src="img/icon-512.png" alt="AIHub DJ icon" width="96" height="96" />
-      <div class="eyebrow" style="justify-content:center">Free · v<span id="dl-version">1.0.0</span></div>
+      <div class="eyebrow" style="justify-content:center">Free · v<span id="dl-version">1.1.0</span></div>
       <h2>Drop the needle.</h2>
       <p>Free download. No account. No subscription. Your music, YouTube and an AI DJ, all in one app.</p>
       <a class="btn btn-primary dl-link" id="dl-main" href="https://github.com/pitchiluxe/aihub-dj/releases/latest/download/AIHub-DJ-Setup.exe">
@@ -411,9 +411,10 @@
     <div class="faq">
       <details class="r"><summary>Is AIHub DJ really free?</summary><p>Yes. Free to download and use, no account and no subscription.</p></details>
       <details class="r"><summary>Do I need an internet connection?</summary><p>Only for YouTube and cover art. Your own music files play offline, and the AI DJ can run fully on your computer with Ollama.</p></details>
-      <details class="r"><summary>What do I need for the AI DJ?</summary><p>Install <a href="https://ollama.com/download" target="_blank" rel="noopener">Ollama</a> and a small model (for example <code>ollama pull llama3.2:3b</code>). AIHub DJ finds it automatically. Nothing you ask leaves your machine.</p></details>
+      <details class="r"><summary>What do I need for the AI DJ?</summary><p>Install <a href="https://ollama.com/download" target="_blank" rel="noopener">Ollama</a> and a small model (for example <code>ollama pull llama3.2:3b</code>). AIHub DJ finds it automatically. With local Ollama, your requests stay on your computer. If you configure the optional OpenRouter fallback, requests sent through it go to that provider.</p></details>
       <details class="r"><summary>Which music files can I play?</summary><p>MP3, FLAC, WAV, M4A, OGG and AAC, plus music videos (MP4, MKV, MOV), alongside anything you search on YouTube.</p></details>
       <details class="r"><summary>Is this the same DJ as in AIHub Browser?</summary><p>Yes. It is the DJ console from <a href="https://aihubbrowser.vercel.app" target="_blank" rel="noopener">AIHub Browser</a> as its own app, for when you just want to DJ.</p></details>
+      <details class="r"><summary>How do updates work?</summary><p>From version 1.1.0, AIHub DJ checks GitHub Releases after launch and every six hours while it is open. A notification offers the new version. Choose Download, then Restart to update when your set is finished. You can also check from Settings. Downloaded updates install when the app closes. Users on 1.0.0 should install 1.1.0 once to enable future updates.</p></details>
       <details class="r"><summary>Why does Windows warn me when I install it?</summary><p>Windows SmartScreen warns about new apps that are not code-signed yet. Click “More info” and “Run anyway” to install.</p></details>
     </div>
   </div>
@@ -490,18 +491,6 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') box.click() })
   })()
 
-  /* The newest release: version label and installer link follow GitHub, with the static link as fallback. */
-  ;(async function(){
-    try {
-      const r = await fetch('https://api.github.com/repos/pitchiluxe/aihub-dj/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
-      if (!r.ok) return
-      const rel = await r.json()
-      const exe = (rel.assets || []).find(a => /\.exe$/i.test(a.name) && !/blockmap/i.test(a.name))
-      if (rel.tag_name) document.getElementById('dl-version').textContent = rel.tag_name.replace(/^v/, '')
-      if (exe) document.getElementById('dl-main').href = exe.browser_download_url
-    } catch {}
-  })()
-
   /* Contact form: FormSubmit, with a mail-app fallback if it can't be reached (same as the AIHub Browser site) */
   ;(function(){
     const form = document.getElementById('contactForm'); if (!form) return
@@ -538,5 +527,6 @@
     })
   })()
 </script>
+<script src="release.js" defer></script>
 </body>
 </html>

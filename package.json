@@ -1,6 +1,6 @@
 {
   "name": "aihub-dj",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "AIHub DJ — the DJ console from AIHub Browser as its own desktop app: two decks, YouTube and local music, stems, effects, AI DJ.",
   "main": "./out/main/index.js",
   "author": "Erick OMARI — My Digital Solutions",
@@ -12,10 +12,13 @@
     "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
     "test": "vitest run",
     "icon": "cross-env ELECTRON_RUN_AS_NODE= electron scripts/make-icon.cjs",
-    "package": "npm run build && cross-env ELECTRON_RUN_AS_NODE= electron-builder --win",
-    "postinstall": "install-electron"
+    "package": "npm run build && cross-env ELECTRON_RUN_AS_NODE= electron-builder --win --publish never",
+    "postinstall": "install-electron",
+    "test:palettes": "node scripts/check-palettes.cjs",
+    "verify:release": "node scripts/verify-release.cjs"
   },
   "dependencies": {
+    "electron-updater": "^6.8.9",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -40,10 +43,33 @@
     "productName": "AIHub DJ",
     "copyright": "Copyright © 2026 Erick OMARI — My Digital Solutions",
     "asar": true,
-    "directories": { "output": "dist", "buildResources": "build" },
-    "files": ["out/**/*", "LICENSE.txt"],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "pitchiluxe",
+        "repo": "aihub-dj",
+        "releaseType": "draft"
+      }
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/main/**/*",
+      "out/preload/**/*",
+      "out/renderer/**/*",
+      "LICENSE.txt"
+    ],
     "win": {
-      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
       "icon": "build/icon.ico",
       "artifactName": "AIHub-DJ-Setup.${ext}",
       "requestedExecutionLevel": "asInvoker"

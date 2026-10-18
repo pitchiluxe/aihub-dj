@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import DjPage from './components/dj/DjPage'
+import UpdateBar from './UpdateBar'
 import './app.css'
 
 // The whole window is the DJ console — the same DjPage AIHub Browser shows in its aihub://dj tab.
@@ -9,5 +10,6 @@ import './app.css'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <div className="dj-app">
     <DjPage />
+    <UpdateBar />
   </div>,
 )

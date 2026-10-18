@@ -8,12 +8,12 @@ the AI DJ stage.
 
 | Folder | Source |
 |---|---|
-| `src/renderer/src/components/dj/` | copied unchanged from AIHub Browser |
+| `src/renderer/src/components/dj/` | adapted from AIHub Browser; standalone skins and fixes |
 | `src/main/dj/`, `src/main/youtubeSearch.ts` | copied unchanged from AIHub Browser |
 | `src/main/index.ts`, `net.ts`, `ai.ts`, `factsStore.ts`, `src/preload/index.ts` | the standalone shell around it |
 
 AIHub Browser keeps its own copy of the DJ — this folder does not replace it.
-To bring later DJ changes across, copy those two folders again from the browser.
+To bring later DJ changes across, merge changes from those folders and test them; replacing the folders would discard the standalone skin and layout fixes.
 
 ## AI DJ
 
@@ -29,5 +29,9 @@ npm install        # also fetches the Electron binary
 npm run dev        # run from source
 npm test           # the DJ's tests
 npm run icon       # re-render build/icon.ico from build/icon.svg (npx electron scripts/make-icon.cjs)
-npm run package    # build dist/AIHub-DJ-Setup-<version>.exe
+npm run package    # build dist/AIHub-DJ-Setup.exe
 ```
+
+## Updates and releases
+
+Version 1.1.0 adds GitHub update notifications, on-demand downloads and restart-to-update. Users on the original 1.0.0 installer must install 1.1.0 once. See [release instructions](docs/RELEASING.md) for packaging, validation and future tagged releases.

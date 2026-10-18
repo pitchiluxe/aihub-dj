@@ -6,13 +6,14 @@
  * the aihub-media:// scheme for local files, the DJ's IPC, YouTube search,
  * the AI DJ's language model and its facts store.
  */
-import { app, BrowserWindow, ipcMain, Menu, session, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, Notification, session, shell } from 'electron'
 import path from 'path'
 import { registerMediaScheme, registerMediaProtocol, registerDjIpc } from './dj/library'
 import { parseSearchResults, searchUrl, type YouTubeVideo } from './youtubeSearch'
 import { httpGet, withNetRetry } from './net'
 import { registerAiIpc } from './ai'
 import { registerFactsIpc, flushFacts } from './factsStore'
+import { initAutoUpdater } from './updater'
 
 app.setName('AIHub DJ')
 // Windows groups the taskbar button and notifications by this id.
@@ -115,6 +116,19 @@ app.whenReady().then(() => {
   registerFactsIpc()
   registerAiIpc()
   createWindow()
+  initAutoUpdater((channel, payload) => {
+    if (win && !win.isDestroyed()) win.webContents.send(channel, payload)
+  }, (version, ready) => {
+    if (win?.isFocused() || !Notification.isSupported()) return
+    try {
+    const notification = new Notification({
+      title: ready ? 'AIHub DJ update ready' : 'AIHub DJ update available',
+      body: ready ? `Version ${version} is ready. Open AIHub DJ to restart and install.` : `Version ${version} is available. Open AIHub DJ to download it.`,
+    })
+    notification.on('click', () => { if (win) { if (win.isMinimized()) win.restore(); win.show(); win.focus() } })
+    notification.show()
+    } catch { /* Windows notification settings must not interrupt updating. */ }
+  })
   app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow() })
 })
 

@@ -1,0 +1,25 @@
+.aihub-update {
+  position: fixed; left: 18px; bottom: 18px; z-index: 1000;
+  display: flex; align-items: center; gap: 12px;
+  max-width: min(520px, calc(100vw - 36px)); padding: 12px 12px 12px 14px;
+  border-radius: 14px; color: #f6f3ff; font-family: Inter, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, rgba(30, 14, 52, .96), rgba(12, 8, 22, .97));
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .6), 0 0 0 1px rgba(168, 85, 247, .25), 0 0 30px rgba(255, 43, 214, .18);
+  animation: aihub-update-in .35s cubic-bezier(.2, .8, .2, 1);
+}
+@keyframes aihub-update-in { from { transform: translateY(16px); opacity: 0; } }
+.aihub-update-ic { width: 36px; height: 36px; flex: none; border-radius: 10px; display: grid; place-items: center; color: #fff;
+  background: linear-gradient(135deg, #22d3ee, #a855f7 55%, #ff2bd6); }
+.aihub-update-ic .spin { animation: aihub-spin 1s linear infinite; }
+@keyframes aihub-spin { to { transform: rotate(360deg); } }
+.aihub-update-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.aihub-update-text b { font-size: 13.5px; }
+.aihub-update-text span { font-size: 12.5px; color: #c4bad8; }
+.aihub-update-bar { height: 4px; margin-top: 6px; border-radius: 4px; background: rgba(255, 255, 255, .1); overflow: hidden; }
+.aihub-update-bar i { display: block; height: 100%; background: linear-gradient(90deg, #22d3ee, #a855f7, #ff2bd6); transition: width .2s; }
+.aihub-update-btn { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px; border: 0; border-radius: 999px; cursor: pointer;
+  font: 700 12.5px Inter, 'Segoe UI', sans-serif; color: #fff; background: linear-gradient(90deg, #ff2bd6, #a855f7); box-shadow: 0 6px 18px rgba(255, 43, 214, .35); }
+.aihub-update-btn:hover { filter: brightness(1.1); }
+.aihub-update-x { flex: none; width: 28px; height: 28px; border: 0; border-radius: 8px; cursor: pointer; display: grid; place-items: center; color: #b3aac8; background: transparent; }
+.aihub-update-x:hover { background: rgba(255, 255, 255, .08); color: #fff; }
