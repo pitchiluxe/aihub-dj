@@ -41,4 +41,17 @@ contextBridge.exposeInMainWorld('electronAPI', {
     onChunk: (_cb: (c: unknown) => void) => () => {},
   },
   appVersion: () => ipcRenderer.invoke('app:version'),
+  // Auto-update (electron-updater against GitHub Releases).
+  updater: {
+    check:      () => ipcRenderer.invoke('updater:check'),
+    download:   () => ipcRenderer.invoke('updater:download'),
+    install:    () => ipcRenderer.invoke('updater:install'),
+    getVersion: () => ipcRenderer.invoke('updater:getVersion'),
+    getState:   () => ipcRenderer.invoke('updater:getState'),
+    onEvent: (cb: (e: unknown) => void) => {
+      const h = (_e: unknown, payload: unknown) => cb(payload)
+      ipcRenderer.on('updater:event', h)
+      return () => ipcRenderer.removeListener('updater:event', h)
+    },
+  },
 })

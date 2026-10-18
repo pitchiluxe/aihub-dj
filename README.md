@@ -29,5 +29,9 @@ npm install        # also fetches the Electron binary
 npm run dev        # run from source
 npm test           # the DJ's tests
 npm run icon       # re-render build/icon.ico from build/icon.svg (npx electron scripts/make-icon.cjs)
-npm run package    # build dist/AIHub-DJ-Setup-<version>.exe
+npm run package    # build dist/AIHub-DJ-Setup.exe
 ```
+
+## Updates and releases
+
+Version 1.1.0 adds GitHub update notifications, on-demand downloads and restart-to-update. Users on the original 1.0.0 installer must install 1.1.0 once. See [release instructions](docs/RELEASING.md) for packaging, validation and future tagged releases.
