@@ -8,12 +8,12 @@ the AI DJ stage.
 
 | Folder | Source |
 |---|---|
-| `src/renderer/src/components/dj/` | copied unchanged from AIHub Browser |
+| `src/renderer/src/components/dj/` | adapted from AIHub Browser; standalone skins and fixes |
 | `src/main/dj/`, `src/main/youtubeSearch.ts` | copied unchanged from AIHub Browser |
 | `src/main/index.ts`, `net.ts`, `ai.ts`, `factsStore.ts`, `src/preload/index.ts` | the standalone shell around it |
 
 AIHub Browser keeps its own copy of the DJ — this folder does not replace it.
-To bring later DJ changes across, copy those two folders again from the browser.
+To bring later DJ changes across, merge changes from those folders and test them; replacing the folders would discard the standalone skin and layout fixes.
 
 ## AI DJ
 

@@ -75,7 +75,7 @@
   --dj-label: #ececec; --dj-label-soft: #ececec; --dj-text: #ececec;
   --dj-light: linear-gradient(#383a3b, #1a1b1d); --dj-light-ink: #ececec; --dj-light-edge: #555b64;
   --dj-lcd: #07090c; --dj-ink: #d7eef5; --reference-a: #24d3e8; --reference-b: #f84da5;
-  --dj-record-label: #e51b23; 
+  --dj-record-label: #e51b23;
   background: #090a0c;
 }
 .aihub-dj[data-dj-look='battle-art'] :is(.dj-panel, .dj-top) { background: var(--dj-metal); color: var(--dj-text); border-color: #08090b; border-radius: 4px; box-shadow: inset 0 1px #ffffff40, 0 2px 5px #0008; }

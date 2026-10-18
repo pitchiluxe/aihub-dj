@@ -16,8 +16,8 @@
 - [x] Harden updater and notification bar, and add a manual check entry in app settings.
 - [x] Update landing version/download links, update explanation and fallback behaviour; test.
 - [x] Bump to 1.1.0, validate tag/release asset workflow and document future releases.
-- [ ] Run tests/typecheck; package with publishing disabled; verify manifest, installer hash and embedded update provider.
-- [ ] Prepare a reviewable GitHub draft release if access permits; keep public publication as the final approval step.
+- [x] Run tests/typecheck; package with publishing disabled; verify manifest, installer hash and embedded update provider.
+- [x] Prepare a reviewable GitHub draft release if access permits; keep public publication as the final approval step.
 
 ## Review focus
 Offline/no release, older server version, renderer refresh while downloading, check during download, install before download, and incomplete GitHub asset upload.
@@ -29,3 +29,6 @@ Offline/no release, older server version, renderer refresh while downloading, ch
 - A code reviewer found no blocking issues. Do not push the version tag before publication approval.
 - Landing page loads locally, all referenced images load, and it correctly shows the currently published 1.0.0 while 1.1.0 is a draft.
 - A real installed-app upgrade between two public versions remains a post-publication check.
+
+- Source review: https://github.com/pitchiluxe/aihub-dj/pull/1 (draft).
+- GitHub release v1.1.0 is a draft; publishing and merging remain unperformed.

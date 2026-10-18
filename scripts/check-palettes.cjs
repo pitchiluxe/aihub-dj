@@ -46,7 +46,7 @@ app.whenReady().then(async()=>{
   }
   root.dataset.djTheme='original'; root.dataset.djLook='silver-classic';const silver=sample();root.dataset.djLook='ember-vinyl';
   if(sample()===silver)failures.push('original skin colours lost');
-  
+
   let layoutChecks=0;
   root.innerHTML='<div class="dj-top"><button class="dj-top-automix">AUTOMIX OFF</button></div><div class="dj-row-clocks"><div class="dj-clock"><span class="dj-deck-letter">A</span><button class="dj-time"><span class="dj-lcd-labels">ELAPSED REMAIN</span><span class="dj-lcd-big">0:00.0</span></button></div></div><div class="dj-row-info"></div><div class="dj-row-decks"><div class="dj-mixer dj-panel dj-video-up"><div class="dj-mixer-video">Video</div></div></div>';
   root.style.width='1466px';root.dataset.djReference='1';
