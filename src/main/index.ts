@@ -6,8 +6,9 @@
  * the aihub-media:// scheme for local files, the DJ's IPC, YouTube search,
  * the AI DJ's language model and its facts store.
  */
-import { app, BrowserWindow, ipcMain, Menu, Notification, session, shell } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, Notification, screen, session, shell } from 'electron'
 import path from 'path'
+import { MIN_SIZE, fitBounds, loadBounds, saveBounds } from './windowState'
 import { registerMediaScheme, registerMediaProtocol, registerDjIpc } from './dj/library'
 import { parseSearchResults, searchUrl, type YouTubeVideo } from './youtubeSearch'
 import { httpGet, withNetRetry } from './net'
@@ -34,8 +35,10 @@ if (!app.requestSingleInstanceLock()) app.quit()
 let win: BrowserWindow | null = null
 
 function createWindow(): void {
+  // An ordinary window at the size and place it was last left (windowState.ts).
+  const bounds = fitBounds(loadBounds(app.getPath('userData')), screen.getAllDisplays().map(d => d.workArea), screen.getPrimaryDisplay().workArea)
   win = new BrowserWindow({
-    width: 1480, height: 920, minWidth: 1100, minHeight: 680,
+    ...bounds, minWidth: MIN_SIZE.width, minHeight: MIN_SIZE.height,
     show: false,
     title: 'AIHub DJ',
     backgroundColor: '#0b0c0e',
@@ -52,7 +55,9 @@ function createWindow(): void {
       backgroundThrottling: false,
     },
   })
-  win.once('ready-to-show', () => { win?.maximize(); win?.show() })
+  win.once('ready-to-show', () => win?.show())
+  // Remember the un-maximized size, so the next launch opens as a normal window.
+  win.on('close', () => { if (win) saveBounds(app.getPath('userData'), win.getNormalBounds()) })
   // Links open in the user's browser, never inside the DJ window.
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (/^https?:\/\//i.test(url)) void shell.openExternal(url)
